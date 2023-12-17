@@ -8,19 +8,20 @@ import org.openqa.selenium.By;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.chrome.ChromeDriver;
 import pages.LoginPage;
+import utilities.Driver;
 
 public class LoginStep {
- WebDriver driver;
+ //WebDriver driver;
 
  LoginPage loginPage ;
 
     @Given("User lands on HRM application")
     public void user_lands_on_hrm_application() throws InterruptedException {
-        System.setProperty("webdriver.chrome.driver","src/test/resources/drivers/chromedriver.exe");
-        driver = new ChromeDriver();
-        driver.get("https://practicetestautomation.com/practice-test-login/");
+        //System.setProperty("webdriver.chrome.driver","src/test/resources/drivers/chromedriver.exe");
+      //  driver = new ChromeDriver();
+        Driver.getDriver().get("https://practicetestautomation.com/practice-test-login/");
         Thread.sleep(5000);
-        loginPage = new LoginPage(driver);
+        loginPage = new LoginPage();
 
         // This is 2 nd way of pageFactory use
         //PageFactory.initElements(driver, loginPage);
@@ -49,9 +50,9 @@ public class LoginStep {
 
     @Then("User should be able to land on home page")
     public void user_should_be_able_to_land_on_home_page() {
-        boolean actual=  driver.findElement(By.cssSelector("a.wp-block-button__link.has-text-color.has-background.has-very-dark-gray-background-color")).isDisplayed();
+        boolean actual=  Driver.getDriver().findElement(By.cssSelector("a.wp-block-button__link.has-text-color.has-background.has-very-dark-gray-background-color")).isDisplayed();
         Assert.assertTrue(" The username element not displayed",actual);
-        driver.quit();
+        Driver.getDriver().quit();
     }
 
 }
