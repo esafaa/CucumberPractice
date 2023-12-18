@@ -24,5 +24,8 @@ public class LoginPage {
     @FindBy(id="submit")
     public WebElement submitButton;
 
+    @FindBy(id="error")
+    public WebElement errorMessage;
+
 
 }

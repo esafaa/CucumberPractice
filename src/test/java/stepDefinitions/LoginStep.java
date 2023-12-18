@@ -50,8 +50,37 @@ public class LoginStep {
     @Then("User should be able to land on home page")
     public void user_should_be_able_to_land_on_home_page() {
         boolean actual=  Driver.getDriver().findElement(By.cssSelector("a.wp-block-button__link.has-text-color.has-background.has-very-dark-gray-background-color")).isDisplayed();
-        Assert.assertTrue(" The username element not displayed",actual);
-        Driver.getDriver().quit();
+        Assert.assertTrue(" Logout button not displayed",actual);
+        //Driver.getDriver().quit();
     }
+    @When("User enters invalid username")
+    public void user_enters_invalid_username() {
+        loginPage.usernameTextBox.sendKeys("InvalidUser");
+    }
+
+    @When("User enters invalid pwd")
+    public void user_enters_invalid_pwd() {
+        loginPage.usernameTextBox.sendKeys("InvalidPassword");
+    }
+
+    @Then("User should not be able to land on home page")
+    public void user_should_not_be_able_to_land_on_home_page() throws InterruptedException {
+       String actualMessage=loginPage.errorMessage.getText();
+       String expectedMessage="Your username is invalid!";
+       Thread.sleep(5000);
+       Assert.assertEquals("The error message verification failed", expectedMessage, actualMessage);
+
+
+    }
+
+    @When("User enters empty username")
+    public void user_enters_empty_username() {
+    loginPage.usernameTextBox.sendKeys("");
+    }
+    @When("User enters empty pwd")
+    public void user_enters_iempty_pwd() {
+        loginPage.pwdTextBox.sendKeys("");
+    }
+
 
 }
